@@ -29,6 +29,12 @@ export const getImage: ProviderGetImage = (src, { modifiers = {}, baseURL } = {}
     baseURL = joinURL(ctx.options.nuxt.baseURL, '/_ipx')
   }
 
+  if (src.includes('prismic')) {
+    return {
+      url: joinURL(baseURL, params, src),
+    }
+  }
+
   return {
     url: joinURL(baseURL, params, encodePath(src)),
   }

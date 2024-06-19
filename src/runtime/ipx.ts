@@ -4,6 +4,7 @@ import type { IPXOptions } from 'ipx'
 import { lazyEventHandler, useBase } from 'h3'
 import { isAbsolute } from 'pathe'
 import type { NitroRuntimeConfig } from 'nitropack'
+import { ofetch } from 'ofetch'
 import { useRuntimeConfig } from '#imports'
 
 export default lazyEventHandler(() => {
@@ -14,6 +15,15 @@ export default lazyEventHandler(() => {
 
   const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : undefined
   const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : undefined
+
+  httpStorage.getData = async (id) => {
+    const response = await ofetch(id, {
+      method: "GET",
+      responseType: "arrayBuffer",
+    });
+    return response;
+  }
+
   if (!fsStorage && !httpStorage) {
     throw new Error('IPX storage is not configured!')
   }

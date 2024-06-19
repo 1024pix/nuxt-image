@@ -47,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
     densities: [1, 2],
   }),
   meta: {
-    name: '@nuxt/image',
+    name: 'nuxt-image-prismic-fix',
     configKey: 'image',
     compatibility: {
       nuxt: '>=3.1.0',

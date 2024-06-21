@@ -30,8 +30,9 @@ export const getImage: ProviderGetImage = (src, { modifiers = {}, baseURL } = {}
   }
 
   if (src.includes('prismic')) {
+    const prismicURL = src.split('?')[0];
     return {
-      url: joinURL(baseURL, params, src),
+      url: joinURL(baseURL, params, prismicURL),
     }
   }
 
